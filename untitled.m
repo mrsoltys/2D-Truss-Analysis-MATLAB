@@ -22,7 +22,7 @@ function varargout = untitled(varargin)
 
 % Edit the above text to modify the response to help untitled
 
-% Last Modified by GUIDE v2.5 13-Mar-2015 11:37:38
+% Last Modified by GUIDE v2.5 14-Mar-2015 11:11:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,9 +59,32 @@ guidata(hObject, handles);
 
 % This sets up the initial plot - only do when we are invisible
 % so window can get raised using untitled.
-if strcmp(get(hObject,'Visible'),'off')
-    plot(rand(5));
-end
+trussStruct=struct();
+trussStruct.trussMembers=[];
+trussStruct.trussSupports=[];
+trussStruct.trussLoads=[];
+trussStruct.trussForces=[];
+
+prompt = {'Horizontal Spacing Interval [ft/m]: ',...
+    'Number of Horizontal Spaces: ',...
+    'Vertical Spacing Interval [ft/m]: ',...
+    'Number of Horizontal Spaces: '};
+dlg_title = 'New Truss Setup';
+num_lines = 1;
+def = {'2','4','1.5','3'};
+answer = inputdlg(prompt,dlg_title,num_lines,def);
+trussStruct.dx=str2num(answer{1});
+trussStruct.nx=round(str2num(answer{2}));
+trussStruct.dy=str2num(answer{3});
+trussStruct.ny=round(str2num(answer{4}));
+
+% Display Coordnate System
+%TrussFig = figure(1);clf;
+%set(TrussFig,'units','normalized','outerposition',[0 0 1 1]);
+axes(handles.axes1);
+redrawTruss(trussStruct)
+handles.trussStruct=trussStruct;
+guidata(hObject, handles);
 
 % UIWAIT makes untitled wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -83,22 +106,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 axes(handles.axes1);
-cla;
 
-popup_sel_index = get(handles.popupmenu1, 'Value');
-switch popup_sel_index
-    case 1
-        plot(rand(5));
-    case 2
-        plot(sin(1:0.01:25.99));
-    case 3
-        bar(1:.5:10);
-    case 4
-        plot(membrane);
-    case 5
-        surf(peaks);
-end
-
+handles.trussStruct = addMembers(handles.trussStruct);
+guidata(hObject, handles);
 
 % --------------------------------------------------------------------
 function FileMenu_Callback(hObject, eventdata, handles)
@@ -162,3 +172,24 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 set(hObject, 'String', {'plot(rand(5))', 'plot(sin(1:0.01:25))', 'bar(1:.5:10)', 'plot(membrane)', 'surf(peaks)'});
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton4.
+function pushbutton4_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

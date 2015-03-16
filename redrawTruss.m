@@ -1,5 +1,7 @@
-function [] = redrawTruss(ts)
-    figure(1);clf;
+function [] = redrawTruss(ts, h)
+    if nargin == 1; h=gca; end;
+    %figure(1);
+    cla;
     
     % set axis to give us some extra space
     axis([0 ts.dx*ts.nx 0 ts.dy*ts.ny]);
@@ -43,7 +45,7 @@ function [] = redrawTruss(ts)
         y=ts.trussLoads(n,2);
         Fx=ts.trussLoads(n,3);
         Fy=ts.trussLoads(n,4);
-        axPos = get(gca,'Position'); %# gca gets the handle to the current axes
+        axPos = get(h,'Position'); %# gca gets the handle to the current axes
         xMinMax = xlim;
         yMinMax = ylim;
         arrowEndX = axPos(1) + ((x - xMinMax(1))/(xMinMax(2)-xMinMax(1))) * axPos(3);
@@ -51,7 +53,7 @@ function [] = redrawTruss(ts)
         arrowStartX = axPos(1) + ((x-Fx*.1 - xMinMax(1))/(xMinMax(2)-xMinMax(1))) * axPos(3);
         arrowStartY = axPos(2) + ((y-Fy*.1 - yMinMax(1))/(yMinMax(2)-yMinMax(1))) * axPos(4);
 
-        annotation('textarrow',...
-            [arrowStartX,arrowEndX],[arrowStartY,arrowEndY],...
-            'String',num2str(sqrt(Fx^2+Fy^2),3))
+         annotation('textarrow',...
+             [arrowStartX,arrowEndX],[arrowStartY,arrowEndY],...
+             'String',num2str(sqrt(Fx^2+Fy^2),3))
     end

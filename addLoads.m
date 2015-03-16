@@ -1,4 +1,5 @@
-function trussLoads=addLoads(ts)
+function trussLoads=addLoads(ts,h)
+    if nargin == 1; h=gca; end;
     title('Click on joint to apply loading. Press Return when finished.')
     [x,y] = ginput(1);
     while ~isempty(x)
@@ -38,7 +39,8 @@ function trussLoads=addLoads(ts)
             ts.trussLoads(i,:) = [x,y,Fx,Fy];
         end
         
-        redrawTruss(ts);
+        redrawTruss(ts,h);
+        title('Click on joint to apply loading. Press Return when finished.')
         %Plot Load 
         %Note: Might make Plot Loads a different function to call after
         %calculations also...
