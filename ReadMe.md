@@ -13,10 +13,8 @@ A pop up will ask you for the dimensions of your truss, in order to create the g
 
 1) Add Members
 	Draw the truss by clicking on the "Add Members" button.  Each member can be drawn by clicking two points on the grid.  Note: The total number of members must be equal to 1/2 the number of joints minus 3. Failure to comply will result in an instable or indeterminate truss, and will result in errors.
-
-	Retrace a member to delete it.
-
-	When finished adding all members, click the "return" key.
+Retrace a member to delete it.
+When finished adding all members, click the "return" key.
 
 2) Add Supports
 	Click the "Add Supports" button, and the script will ask you first to choose the loaction of the pin support and next to determine the location of the roller support.  Currently, the roller support will only provide a vertical reaction.

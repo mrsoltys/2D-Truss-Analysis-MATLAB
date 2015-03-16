@@ -28,7 +28,7 @@ while ~isempty(x)
         end
         
         if delete %need to replot
-            redrawTruss(ts);
+            redrawTruss(ts)
             title('Click two points to create a member. Retrace a member to delete it. Press Return when finished drawing truss.')
 
         else % otherwise add the point and plot

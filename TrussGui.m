@@ -22,7 +22,7 @@ function varargout = TrussGui(varargin)
 
 % Edit the above text to modify the response to help TrussGui
 
-% Last Modified by GUIDE v2.5 16-Mar-2015 10:40:31
+% Last Modified by GUIDE v2.5 16-Mar-2015 11:38:29
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -130,3 +130,23 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 computeTruss(handles.trussStruct)
+
+
+% --- Executes on button press in pushbutton5.
+function pushbutton5_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+trussStruct=handles.trussStruct;
+uisave({'trussStruct'},'New Truss');
+
+
+% --- Executes on button press in pushbutton6.
+function pushbutton6_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+uiopen('load')
+handles.trussStruct=trussStruct;
+redrawTruss(trussStruct);
+guidata(hObject, handles);
