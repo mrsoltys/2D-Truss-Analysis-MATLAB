@@ -1,4 +1,4 @@
-function [trussMembers] = addMembers(ts);
+function [trussMembers] = addMembers(ts)
 title('Click two points to create a member. Retrace a member to delete it. Press Return when finished drawing truss.')
 
 [x,y] = ginput(2);
@@ -42,15 +42,40 @@ while ~isempty(x)
     end    
     [x,y] = ginput(2);
     
-    if isempty(x)
+      if isempty(x)
+        %figure out a radio box to put in here?? 
         if 2*size(unique([ts.trussMembers(:,1:2);ts.trussMembers(:,3:4)],'rows'),1)<...
                 (size(unique(ts.trussMembers,'rows'),1)+3)
-            warning('Truss is indeterminite')
-            text(0,-.2,'Indeterminite');
+          %warning for indeterm. truss
+          prompt={'The truss is indeterminite.Would you like to fix your truss?' };
+          name = 'Warning';
+          defaultans = {'yes'};
+          options.Interpreter = 'tex';
+          answer = inputdlg(prompt,name,[1 40],defaultans,options);
+          
+          %comparing user answer to fix truss
+          newans = char(lower(answer))  
+          a = 'yes';
+            if strcmp(newans,a) == 1 ;
+                [x,y] = ginput(2);
+            end
+            
         elseif 2*size(unique([ts.trussMembers(:,1:2);ts.trussMembers(:,3:4)],'rows'),1)>...
                 (size(unique(ts.trussMembers,'rows'),1)+3)
-            warning('Truss is not stable')
-            text(0,-.2,'Not Stable');
+          %warning for unstable truss
+          prompt={'The truss is unstable, would you like to fix your truss?' };
+          name = 'Warning';
+          defaultans = {'yes'};
+          options.Interpreter = 'tex';
+          answer = inputdlg(prompt,name,[1 40],defaultans,options);
+          
+          %comparing user answer to fix truss
+          newans = char(lower(answer))
+            
+          a = 'yes';
+            if strcmp(newans,a) == 1 ;
+                [x,y] = ginput(2);
+            end
         end
     end
 end
