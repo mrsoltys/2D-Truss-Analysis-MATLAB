@@ -18,17 +18,22 @@
 % Updates ts with trussForces updated
 
 function [] = computeTruss(ts)
-for i=1:size(ts.trussMembers,1);
+% compute the length of each member and store this in memberLengths
+for i=1:size(ts.trussMembers,1)
     memberLengths(i)=sqrt((ts.trussMembers(i,1)-ts.trussMembers(i,3))^2+...
         (ts.trussMembers(i,2)-ts.trussMembers(i,4))^2);
 end
 
+% Compute coordinate of each unique joint.
 trussJoints = unique([ts.trussMembers(:,1:2);ts.trussMembers(:,3:4)],'rows');
-% Need to make a 2J x 2J matrix, and a 2J x 1 matrix of loadings
-A=zeros(size(trussJoints,1)*2,size(trussJoints,1)*2);
-B    =zeros(size(trussJoints,1)*2,1);
+% create empty A and B matrix. A should be [2J x 2J]m, B should be[2J x 1]
+A = zeros(size(trussJoints,1)*2,size(trussJoints,1)*2);
+B = zeros(size(trussJoints,1)*2,1);
+
+% Fill in A matrix
+% ================
 for i=1:size(trussJoints,1)
-    %Note, find X and y components at each joint
+    %Note: find X and y components for each member at each joint
     for j=1:size(ts.trussMembers,1)
         if isequal(trussJoints(i,:),ts.trussMembers(j,1:2)) 
             A(2*i-1,j)=(ts.trussMembers(j,3)-ts.trussMembers(j,1))/memberLengths(j);
@@ -39,7 +44,7 @@ for i=1:size(trussJoints,1)
         end
     end
     
-    %don't forget pin and roller
+    %don't forget unkowns at pin and roller
     if isequal(trussJoints(i,:),ts.trussSupports(1:2))
         A(2*i-1,j+1)=1;
         A(2*i,j+2)=1;
@@ -54,7 +59,6 @@ for i=1:size(trussJoints,1)
             B(2*i,1)  =ts.trussLoads(j,4);
         end
     end
-    
 end
 
 ts.trussForces = -A\B
