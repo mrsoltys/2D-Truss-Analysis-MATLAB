@@ -4,18 +4,17 @@
 % Inputs:
 % ts is a structure that contains the following fields:
 %   * ts.trussMembers is a [nx4] matrix where n is the number of members. 
-%       each row contains the x, y start and x, y stop coordnate of each 
-%       member. 
-%   * ts.trussSupports is a [1x4] matrix containing the x, y coordinates 
-%       of the pin and roller, respectively
-%   * ts.trussLoads is a [nx4] matrix where n is the number of loading points.
-%       each row contains x and y coordinates of the loading points, 
+%       each row contains the x, and y start coordnate, and x and y 
+%       stop coordnate of each member. 
+%   * ts.trussSupports contains the x and y coordinate of the pin and 
+%       roller, respectively
+%   * ts.trussLoads contains x and y coordinates of each loading points, 
 %       as well as the x and y magnitude of the loading
 %   * ts.trussForces contains x matrix of unknowns in Ax=B equation
-%       its size shoud be [(N+3)x1], where N is the number of members. 
 %=========
 % Outputs:
 % Updates ts with trussForces updated
+
 
 function [] = computeTruss(ts)
 for i=1:size(ts.trussMembers,1);

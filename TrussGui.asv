@@ -59,11 +59,8 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 trussStruct=struct();
-% trussMembers contains the x and y start coordnate, and x and y stop
-% coordnate of each member. 
 trussStruct.trussMembers=[];
-% trussSupports contains the x and y coordinate of the pin and roller,
-% respectively
+% trussSupp
 trussStruct.trussSupports=[];
 % trussLoads contains x and y coordinates of each loading points, as well
 % as the x and y magnitude of the loading
