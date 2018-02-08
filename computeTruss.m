@@ -1,4 +1,4 @@
-% computeTruss(ts)
+function [] = computeTruss(ts)
 % This fills in the matrix Ax=B for the truss and solves it using x=A\B
 %========
 % Inputs:
@@ -17,7 +17,6 @@
 % Outputs:
 % Updates ts with trussForces updated
 
-function [] = computeTruss(ts)
 % compute the length of each member and store this in memberLengths
 for i=1:size(ts.trussMembers,1)
     memberLengths(i)=sqrt((ts.trussMembers(i,1)-ts.trussMembers(i,3))^2+...
