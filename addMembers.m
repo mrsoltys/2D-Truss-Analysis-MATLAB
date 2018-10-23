@@ -1,14 +1,21 @@
 function [trussMembers] = addMembers(ts)
 title('Click two points to create a member. Retrace a member to delete it. Press Return when finished drawing truss.')
 % Get a pair of X,Y coordnates using the mouse as an input
-[x,y] = ginput(2);
+[x1,y1] = ginput(1);
 %Keep getting points until I say so...
-while ~isempty(x)
+while ~isempty(x1)
+    %Check for offscreen click
+        if x1<0
+            break;
+        else
+            [x2,y2] = ginput(1);
+        end 
+        
     % Round input to grid coordinates
-    x1=round(x(1)/ts.dx)*ts.dx;
-    x2=round(x(2)/ts.dx)*ts.dx;
-    y1=round(y(1)/ts.dy)*ts.dy;
-    y2=round(y(2)/ts.dy)*ts.dy;
+    x1=round(x1/ts.dx)*ts.dx;
+    x2=round(x2/ts.dx)*ts.dx;
+    y1=round(y1/ts.dy)*ts.dy;
+    y2=round(y2/ts.dy)*ts.dy;
     
     %If start point is bigger than endpoint, swap them
     if x1>x2
@@ -50,7 +57,7 @@ while ~isempty(x)
     title('Click two points to create a member. Retrace a member to delete it. Press Return when finished drawing truss.')
         
     %Get next 2 points
-    [x,y] = ginput(2);
+    [x1,y1] = ginput(1);
 end
 
 %Check for Indeterminite Truss
