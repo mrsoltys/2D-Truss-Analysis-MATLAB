@@ -138,7 +138,6 @@ function pushbutton4_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 computeTruss(handles.trussStruct)
 
-
 % --- Executes on button press in pushbutton5.
 function pushbutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
@@ -146,7 +145,6 @@ function pushbutton5_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 trussStruct=handles.trussStruct;
 uisave({'trussStruct'},'New Truss');
-
 
 % --- Executes on button press in pushbutton6.
 function pushbutton6_Callback(hObject, eventdata, handles)

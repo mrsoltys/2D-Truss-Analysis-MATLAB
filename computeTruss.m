@@ -60,5 +60,10 @@ for i=1:size(trussJoints,1)
     end
 end
 
-ts.trussForces = -A\B
+disp('Solving A\B with A:')
+A
+disp('and B:')
+B
+-A\B
+ts.trussForces = -A\B;
 redrawTruss(ts);
