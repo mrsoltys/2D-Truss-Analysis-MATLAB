@@ -3,6 +3,12 @@ function trussLoads=addLoads(ts,h)
     title('Click on joint to apply loading. Press Return when finished.')
     [x,y] = ginput(1);
     while ~isempty(x)
+        %Check for offscreen click
+        if x<0
+            break;
+        end
+        
+        %round to grid
         x = round(x/ts.dx)*ts.dx;
         y = round(y/ts.dy)*ts.dy;
         
@@ -33,19 +39,14 @@ function trussLoads=addLoads(ts,h)
         Fy=str2num(answer{2});
         
         if ~repeat
-            ts.trussLoads = [ts.trussLoads;...
-                         [x,y,Fx,Fy]];
+            ts.trussLoads = [ts.trussLoads; [x,y,Fx,Fy]];
         else
             ts.trussLoads(i,:) = [x,y,Fx,Fy];
         end
         
         redrawTruss(ts,h);
         title('Click on joint to apply loading. Press Return when finished.')
-        %Plot Load 
-        %Note: Might make Plot Loads a different function to call after
-        %calculations also...
-
-        
+  
         [x,y] = ginput(1);
     end
 
