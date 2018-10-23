@@ -50,8 +50,8 @@ function [] = redrawTruss(ts, h)
         yMinMax = ylim;
         arrowEndX = axPos(1) + ((x - xMinMax(1))/(xMinMax(2)-xMinMax(1))) * axPos(3);
         arrowEndY = axPos(2) + ((y - yMinMax(1))/(yMinMax(2)-yMinMax(1))) * axPos(4);
-        arrowStartX = axPos(1) + ((x-Fx*.1 - xMinMax(1))/(xMinMax(2)-xMinMax(1))) * axPos(3);
-        arrowStartY = axPos(2) + ((y-Fy*.1 - yMinMax(1))/(yMinMax(2)-yMinMax(1))) * axPos(4);
+        arrowStartX = axPos(1) + ((x-Fx*.08 - xMinMax(1))/(xMinMax(2)-xMinMax(1))) * axPos(3);
+        arrowStartY = axPos(2) + ((y-Fy*.08 - yMinMax(1))/(yMinMax(2)-yMinMax(1))) * axPos(4);
 
          annotation('textarrow',...
              [arrowStartX,arrowEndX],[arrowStartY,arrowEndY],...
