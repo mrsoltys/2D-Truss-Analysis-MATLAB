@@ -16,7 +16,7 @@ A pop up will ask you for the dimensions of your truss, in order to create the g
 
 Retrace a member to delete it.
 
-When finished adding all members, click the "return" key.
+_When finished adding all members, click the "return" key._
 
 2) _Add Supports_
 	Click the "Add Supports" button, and the script will ask you first to choose the loaction of the pin support and next to determine the location of the roller support.  Currently, the roller support will only provide a vertical reaction.
@@ -26,9 +26,21 @@ When finished adding all members, click the "return" key.
 
 To edit a load, click on the joint again.
 
-When finished adding all loads, click the "return" key.
+When finished adding all loads, _click the "return" key_.
 
 4) _Analyze_
 	Click "Analyze" to compute the loads in each member. Members in Tension will appear blue, and have positive values, members in compression will appear red and have negative values. Zero-force members will be black. 
 
 5) _Iterate_ - at any time you can change your confiurguation by clicking the approprate button.
+
+## Technical Notes (How it all works)
+
+This code looks big and messy, but mostly this is from creating the graphical user interface. What it's doing underneath the hood is:
+
+Building a `struct` data type that contains the following fields:
+
+  * `trussMembers` is an array of the x and y start and end points of all members of the truss.
+  * `trussSuports` contains the x and y coordinates of the pin and roller supports, respectively
+  * `trussLoas` contains the x and y coordnates and x and y magnitudes of applied loads
+
+  The code then fills in the matricies A and B
